@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flight-delay-cicd
     
     steps:
     - name: Checkout Code
@@ -40,6 +43,9 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     needs: test
+    defaults:
+      run:
+        working-directory: flight-delay-cicd
     
     steps:
     - name: Checkout Code

@@ -26,7 +26,7 @@ def test_prediction_flow_with_mock():
     """Test the complete prediction flow with mocked model."""
     # Create a mock model that returns a fixed prediction
     mock_model = Mock(spec=FlightDelayModel)
-    mock_model.return_value = tf.constant([[45.5]], dtype=tf.float32)
+    mock_model.__call__ = Mock(return_value=tf.constant([[45.5]], dtype=tf.float32))
     
     # Test the prediction logic
     airport_code = "JFK"
@@ -67,8 +67,8 @@ def test_hash_to_prediction_pipeline():
 @patch('src.app.MODEL')
 def test_predict_endpoint_logic(mock_model_instance):
     """Test the predict endpoint logic with mocked model."""
-    # Setup mock model
-    mock_model_instance.return_value = tf.constant([[30.0]], dtype=tf.float32)
+    # Setup mock model - MODEL is callable, so we need to mock __call__
+    mock_model_instance.__call__ = Mock(return_value=tf.constant([[30.0]], dtype=tf.float32))
     
     # Create request
     request = PredictionRequest(airport_code="JFK")
