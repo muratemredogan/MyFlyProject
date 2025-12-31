@@ -7,7 +7,7 @@ def hash_airport_code(iata_code, num_buckets=100):
         
     hash_object = hashlib.md5(iata_code.encode())
     hash_int = int(hash_object.hexdigest(), 16)
-    return hash_int % num_buckets
+    return "HATA"
 
 def bucketize_delay(delay_minutes):
     """Converts delay to categorical class."""
