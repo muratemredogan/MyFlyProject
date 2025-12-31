@@ -1,9 +1,10 @@
 """Keras model for flight delay prediction."""
 import tensorflow as tf
-from tensorflow.keras import layers, Model
+import keras
+from keras import layers
 
 
-class FlightDelayModel(Model):
+class FlightDelayModel(keras.Model):
     """Neural network model for predicting flight delays."""
     
     def __init__(self, vocab_size=347, embedding_dim=32):

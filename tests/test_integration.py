@@ -25,8 +25,10 @@ def test_model_initialization():
 def test_prediction_flow_with_mock():
     """Test the complete prediction flow with mocked model."""
     # Create a mock model that returns a fixed prediction
+    mock_tensor = tf.constant([[45.5]], dtype=tf.float32)
     mock_model = Mock(spec=FlightDelayModel)
-    mock_model.__call__ = Mock(return_value=tf.constant([[45.5]], dtype=tf.float32))
+    mock_model.return_value = mock_tensor
+    mock_model.__call__ = Mock(return_value=mock_tensor)
     
     # Test the prediction logic
     airport_code = "JFK"
@@ -94,6 +96,8 @@ def test_multiple_airport_predictions():
         input_tensor = tf.constant([[airport_bucket]], dtype=tf.int32)
         prediction = model(input_tensor)
         predicted_delay = float(prediction.numpy()[0][0])
+        # Ensure non-negative delay (same as in app.py)
+        predicted_delay = max(0.0, predicted_delay)
         delay_category = bucketize_delay(predicted_delay)
         
         predictions.append({
