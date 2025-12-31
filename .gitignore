@@ -24,22 +24,30 @@ wheels/
 venv/
 env/
 ENV/
+.venv
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Docker
-*.log
+*~
 
 # OS
 .DS_Store
 Thumbs.db
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Model files (if any)
+*.h5
+*.pb
+*.pkl
+*.joblib
+
+# Logs
+*.log

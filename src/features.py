@@ -11,6 +11,7 @@ def hash_airport_code(iata_code, num_buckets=100):
 
 def bucketize_delay(delay_minutes):
     """Converts delay to categorical class."""
+    if delay_minutes < 0: return 0  # Negative delays (early arrivals) treated as category 0
     if delay_minutes < 15: return 0
     elif delay_minutes < 60: return 1
     else: return 2

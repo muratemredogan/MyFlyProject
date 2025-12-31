@@ -1,7 +1,6 @@
 """FastAPI application for flight delay prediction."""
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import numpy as np
 import tensorflow as tf
 
 from src.features import hash_airport_code, bucketize_delay
